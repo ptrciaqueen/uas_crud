@@ -11,10 +11,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
   const [username, setUsername] = useState("");
   const storage = typeof window !== "undefined" ? localStorage : null;
+  const router = useRouter();
 
   useEffect(() => {
     // Retrieve username from localStorage or other persistent storage
@@ -23,12 +25,13 @@ export default function Navbar() {
       setUsername(storedUsername);
     }
   }, []);
+  console.log(username);
 
   const handleLogout = () => {
     storage.removeItem("access_token");
     storage.removeItem("username");
     // Optionally redirect after logout
-    window.location.href = "/";
+    router.push("/");
   };
   return (
     <div className="w-full p-[20px] bg-black text-white">
@@ -49,12 +52,11 @@ export default function Navbar() {
                 <AvatarImage src="https://github.com/shadcn.png" />
                 <AvatarFallback>AN</AvatarFallback>
               </Avatar>
-              <h1>Username</h1>
+              <h1>{username}</h1>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56">
               <DropdownMenuLabel>My Settings</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Profile</DropdownMenuItem>
               <DropdownMenuItem>
                 <Link href="/notes">Add Notes</Link>
               </DropdownMenuItem>

@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./src/index.js"
+    "dev": "nodemon ./src/index.js",
+    "m:migrate": "sequelize db:migrate",
+    "s:latest": "sequelize db:seed:all",
+    "db:sync": "sequelize db:drop && sequelize db:create --charset utf8 && npm run m:migrate"
   },
   "author": "Patricia Queen",
   "license": "ISC",

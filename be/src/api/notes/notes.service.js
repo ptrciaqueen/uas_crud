@@ -1,4 +1,4 @@
-const { Notes } = require("../../models");
+const { Notes, Users } = require("../../models");
 
 const createNote = async (data) => {
   return await Notes.create(data);
@@ -15,6 +15,12 @@ const getAllNotes = async (page, limit, query) => {
     where: query,
     limit,
     offset: limit * page,
+    include: [
+      {
+        model: Users,
+        attributes: { exclude: ["createdAt", "updatedAt"] },
+      },
+    ],
   });
 };
 

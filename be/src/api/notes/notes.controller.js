@@ -1,18 +1,22 @@
+const { Op } = require("sequelize");
 const ResponseHandler = require("../../helpers/handler");
 const service = require("./notes.service");
 
 const createNote = async (req, res) => {
   const response = new ResponseHandler(res);
   try {
-    console.log(req.body);
+    console.log(req);
     const picture = req.file.path;
     const urlArr = picture.split("/");
     const imgPath = urlArr.slice(1, urlArr.length).join("/");
+
+    const user = req.user;
 
     const noteData = {
       title: req.body.title,
       note: req.body.note,
       img_url: imgPath,
+      user_id: user.id,
     };
 
     const newNote = await service.createNote(noteData);
@@ -32,17 +36,13 @@ const findAllNotes = async (req, res) => {
   try {
     const pageAsNumber = Number.parseInt(req.query.page);
     const limitAsNumber = Number.parseInt(req.query.limit);
-    let type = req.query.type;
     let keyword = req.query.keyword;
 
     let query = {};
 
-    if (type && type != 0) {
-      query.type_id = Number(type);
-    }
     if (keyword) {
       query.title = {
-        [Op.iLike]: `%${keyword}%`,
+        [Op.like]: `%${keyword}%`,
       };
     }
 

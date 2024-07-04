@@ -56,8 +56,9 @@ const login = async (req, res) => {
       return response.resp([], 400, "Failed generate token", 400);
     }
     req.session.token = token;
+    res.cookie("username", query);
 
-    return response.resp(token);
+    return response.resp({ token, username: req.body.username });
   } catch (err) {
     console.log(err);
     return response.resp([], 400, err, 400);

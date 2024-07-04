@@ -22,7 +22,7 @@ export const useRegister = () => {
 
 export const useCreateNote = () => {
   return useMutation({
-    mutationsFn: async (body) => {
+    mutationFn: async (body) => {
       const data = await NotesApi.createNote(body);
       return data;
     },
@@ -49,20 +49,19 @@ export const useGetNoteById = (id) => {
   });
 };
 
-export const useUpdateNoteById = (id, body) => {
-  return useQuery({
-    queryKey: ["update_note"],
-    queryFn: async () => {
+export const useUpdateNoteById = () => {
+  return useMutation({
+    mutationFn: async (params) => {
+      const { id, body } = params;
       const data = await NotesApi.updateNoteById(id, body);
       return data;
     },
   });
 };
 
-export const useDeleteNoteById = (id) => {
-  return useQuery({
-    queryKey: ["delete_note"],
-    queryFn: async () => {
+export const useDeleteNoteById = () => {
+  return useMutation({
+    mutationFn: async (id) => {
       const data = await NotesApi.deleteNoteById(id);
       return data;
     },
