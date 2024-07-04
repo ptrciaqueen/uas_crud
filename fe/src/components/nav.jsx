@@ -25,7 +25,6 @@ export default function Navbar() {
       setUsername(storedUsername);
     }
   }, []);
-  console.log(username);
 
   const handleLogout = () => {
     storage.removeItem("access_token");

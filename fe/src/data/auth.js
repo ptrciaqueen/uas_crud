@@ -6,7 +6,6 @@ export default class AuthApi {
   }
 
   static async register(body) {
-    console.log(process.env.REACT_APP_API);
     return api.post("/register", body);
   }
 }

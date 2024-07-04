@@ -23,7 +23,6 @@ export default function Notes() {
 
   const handleChangePic = (e) => {
     const file = e.target.files[0];
-    console.log(file, "======= file");
     if (file) {
       const reader = new FileReader();
       reader.onload = (event) => {
@@ -44,7 +43,7 @@ export default function Notes() {
 
     mutate(formData, {
       onSuccess: (data) => {
-        console.log(data, "===== done");
+        console.log(data);
         router.push("/home");
       },
       onError: (error) => {
@@ -98,11 +97,10 @@ export default function Notes() {
                       ? pictureData.file
                       : vectorUpload
                   }
-                  className={`absolute ${
-                    pictureData.file && !loading
+                  className={`absolute ${pictureData.file && !loading
                       ? "w-full h-full rounded-xl object-cover"
                       : "top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]"
-                  } `}
+                    } `}
                 />
               )}
             </div>

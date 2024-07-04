@@ -2,7 +2,6 @@ import api from "./api";
 
 export default class NotesApi {
   static async createNote(body) {
-    console.log(body, "========body");
     return await api.post("/notes", body);
   }
 

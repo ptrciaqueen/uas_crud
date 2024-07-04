@@ -5,10 +5,9 @@ const service = require("./notes.service");
 const createNote = async (req, res) => {
   const response = new ResponseHandler(res);
   try {
-    console.log(req);
     const picture = req.file.path;
-    const urlArr = picture.split("/");
-    const imgPath = urlArr.slice(1, urlArr.length).join("/");
+    const urlArr = picture.split("\\");
+    const imgPath = urlArr.slice(1, urlArr.length).join("");
 
     const user = req.user;
 

@@ -21,10 +21,7 @@ export default function Home() {
   const handleRegister = () => {
     register(user, {
       onSuccess: (data) => {
-        const token = data?.data;
-        localStorage.setItem("access_token", token.data.token);
-        localStorage.setItem("username", token.data.username);
-        router.push("/home");
+        router.push("/");
         setUser({ username: "", password: "" });
       },
       onError: (error) => {

@@ -9,13 +9,11 @@ const auth = async (req, res, next) => {
     if (!bearer) {
       return response.resp([], 401, "Unauthorized", 401);
     }
-    console.log(req.headers["authorization"]);
 
     const token = bearer.split(" ")[1];
     if (!token) {
       return response.resp([], 401, "Unauthorized", 401);
     }
-    console.log(token, "======== token");
 
     const { id, username } = await jwt.decodeToken(token);
 
